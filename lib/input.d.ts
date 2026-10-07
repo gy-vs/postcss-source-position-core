@@ -39,6 +39,26 @@ declare namespace Input {
     url: string
   }
 
+  /**
+   * Position of an error or warning inside the CSS that PostCSS parsed.
+   *
+   * `offset` is the inclusive start offset and `endOffset` is the exclusive
+   * end offset, matching `Node#source.start.offset` and
+   * `Node#source.end.offset`. `endOffset` is present only for ranges.
+   */
+  export interface ErrorPosition extends FilePosition {
+    /**
+     * Exclusive end offset in the parsed CSS.
+     * Present only when the error or warning points to a range.
+     */
+    endOffset?: number
+
+    /**
+     * Inclusive start offset in the parsed CSS.
+     */
+    offset: number
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   export { Input_ as default }
 }
@@ -137,14 +157,16 @@ declare class Input_ {
       | {
           column: number
           line: number
+          offset?: number
         }
       | {
           offset: number
         },
-    end:
+    end?:
       | {
           column: number
           line: number
+          offset?: number
         }
       | {
           offset: number
@@ -196,9 +218,17 @@ declare class Input_ {
     endLine?: number,
     endColumn?: number
   ): false | Input.FilePosition
-
   /** Converts this to a JSON-friendly object representation. */
   toJSON(): object
+
+  /**
+   * Converts line and column to source offset.
+   * Inverse of `fromOffset()`.
+   *
+   * @param line   Source line, starting from 1.
+   * @param column Source column, starting from 1.
+   */
+  toOffset(line: number, column: number): number
 }
 
 declare class Input extends Input_ {}

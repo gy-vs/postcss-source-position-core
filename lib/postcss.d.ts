@@ -6,7 +6,7 @@ import Container, { ContainerProps, NewChild } from './container.js'
 import CssSyntaxError from './css-syntax-error.js'
 import Declaration, { DeclarationProps } from './declaration.js'
 import Document, { DocumentProps } from './document.js'
-import Input, { FilePosition } from './input.js'
+import Input, { ErrorPosition, FilePosition } from './input.js'
 import LazyResult from './lazy-result.js'
 import list from './list.js'
 import Node, {
@@ -165,6 +165,7 @@ declare namespace postcss {
     DeclarationProps,
     Document,
     DocumentProps,
+    ErrorPosition,
     FilePosition,
     Input,
     LazyResult,

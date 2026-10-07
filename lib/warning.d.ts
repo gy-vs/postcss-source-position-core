@@ -82,6 +82,15 @@ declare class Warning_ {
   endLine?: number
 
   /**
+   * Exclusive end offset in the input file with this warning’s source.
+   *
+   * ```js
+   * warning.endOffset //=> 14
+   * ```
+   */
+  endOffset?: number
+
+  /**
    * Line for inclusive start position in the input file with this warning’s source.
    *
    * ```js
@@ -98,6 +107,15 @@ declare class Warning_ {
    * ```
    */
   node: Node
+
+  /**
+   * Inclusive start offset in the input file with this warning’s source.
+   *
+   * ```js
+   * warning.offset //=> 5
+   * ```
+   */
+  offset?: number
 
   /**
    * The name of the plugin that created this warning.

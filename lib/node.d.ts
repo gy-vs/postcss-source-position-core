@@ -1,9 +1,8 @@
 import AtRule = require('./at-rule.js')
-
 import { AtRuleProps } from './at-rule.js'
 import Comment, { CommentProps } from './comment.js'
 import Container, { NewChild } from './container.js'
-import CssSyntaxError from './css-syntax-error.js'
+import CssSyntaxError, { RangePosition } from './css-syntax-error.js'
 import Declaration, { DeclarationProps } from './declaration.js'
 import Document from './document.js'
 import Input from './input.js'
@@ -91,6 +90,11 @@ declare namespace Node {
 
   export interface NodeErrorOptions {
     /**
+     * An ending position inside the input CSS that should be highlighted
+     * as source of error.
+     */
+    end?: RangePosition
+    /**
      * An ending index inside a node's string that should be highlighted as
      * source of error.
      */
@@ -104,6 +108,11 @@ declare namespace Node {
      * Plugin name that created this error. PostCSS will set it automatically.
      */
     plugin?: string
+    /**
+     * A starting position inside the input CSS that should be highlighted
+     * as source of error.
+     */
+    start?: RangePosition
     /**
      * A word inside a node's string, that should be highlighted as source
      * of error.

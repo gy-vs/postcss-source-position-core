@@ -1,4 +1,4 @@
-import { FilePosition } from './input.js'
+import { ErrorPosition } from './input.js'
 
 declare namespace CssSyntaxError {
   /**
@@ -116,7 +116,7 @@ declare class CssSyntaxError_ extends Error {
    * error.file       //=> 'a.sass'
    * ```
    */
-  input?: FilePosition
+  input?: ErrorPosition
 
   /**
    * Source line of the error.

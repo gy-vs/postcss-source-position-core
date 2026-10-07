@@ -59,9 +59,8 @@ test('saves source', () => {
 
   equal(error.input, {
     column: error.column,
-    endColumn: error.endColumn,
-    endLine: error.endLine,
     line: error.line,
+    offset: 15,
     source: error.source
   })
 })
@@ -83,7 +82,9 @@ test('saves source with ranges', () => {
     column: error.column,
     endColumn: error.endColumn,
     endLine: error.endLine,
+    endOffset: 7,
     line: error.line,
+    offset: 0,
     source: error.source
   })
 })
@@ -109,7 +110,9 @@ test('saves source with ranges', () => {
     column: error.column,
     endColumn: error.endColumn,
     endLine: error.endLine,
+    endOffset: 7,
     line: error.line,
+    offset: 0,
     source: error.source
   })
 })
@@ -131,7 +134,9 @@ test('saves source with ranges', () => {
     column: error.column,
     endColumn: error.endColumn,
     endLine: error.endLine,
+    endOffset: 7,
     line: error.line,
+    offset: 0,
     source: error.source
   })
 })
@@ -289,10 +294,9 @@ test('uses source map', () => {
 
   equal(error.input, {
     column: 1,
-    endColumn: error.endColumn,
-    endLine: error.endLine,
     file: join(__dirname, 'build', 'all.css'),
     line: 3,
+    offset: 7,
     source: 'a { }\n\nb {\n',
     url: urlOf(join('build', 'all.css'))
   })
@@ -318,10 +322,9 @@ test('works with path in sources', () => {
 
   equal(error.input, {
     column: 1,
-    endColumn: error.endColumn,
-    endLine: error.endLine,
     file: join(__dirname, 'build', 'all.css'),
     line: 3,
+    offset: 7,
     source: 'a { }\n\nb {\n',
     url: pathToFileURL(pathOf(join('build', 'all.css'))).toString()
   })
