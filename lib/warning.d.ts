@@ -82,6 +82,16 @@ declare class Warning_ {
   endLine?: number
 
   /**
+   * Exclusive end offset in the CSS source that was actually parsed by
+   * PostCSS. It is not translated by the input source map.
+   *
+   * ```js
+   * warning.node.source.input.css.slice(warning.offset, warning.endOffset)
+   * ```
+   */
+  endOffset?: number
+
+  /**
    * Line for inclusive start position in the input file with this warning’s source.
    *
    * ```js
@@ -98,6 +108,16 @@ declare class Warning_ {
    * ```
    */
   node: Node
+
+  /**
+   * Inclusive start offset in the CSS source that was actually parsed by
+   * PostCSS. It is not translated by the input source map.
+   *
+   * ```js
+   * warning.node.source.input.css.slice(warning.offset, warning.endOffset)
+   * ```
+   */
+  offset?: number
 
   /**
    * The name of the plugin that created this warning.

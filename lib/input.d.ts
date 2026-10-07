@@ -19,6 +19,14 @@ declare namespace Input {
     endLine?: number
 
     /**
+     * Exclusive end offset in the CSS source that was actually parsed by
+     * PostCSS. Present only for ranges. Unlike top-level positions, it is
+     * not translated by the input source map, so it can be used to slice
+     * `error.input.source`.
+     */
+    endOffset?: number
+
+    /**
      * Absolute path to the source file.
      */
     file?: string
@@ -27,6 +35,13 @@ declare namespace Input {
      * Line of inclusive start position in source file.
      */
     line: number
+
+    /**
+     * Inclusive start offset in the CSS source that was actually parsed by
+     * PostCSS. It is not translated by the input source map, so it can be
+     * used to slice `error.input.source`.
+     */
+    offset: number
 
     /**
      * Source code.
@@ -165,6 +180,19 @@ declare class Input_ {
     offset: number,
     opts?: { plugin?: CssSyntaxError['plugin'] }
   ): CssSyntaxError
+  /**
+   * Converts source line and column to offset.
+   *
+   * ```js
+   * root.source.input.fromLineAndColumn(1, 4) //=> 3
+   * ```
+   *
+   * @param line   Source line, starting from 1.
+   * @param column Source column, starting from 1.
+   * @return Source offset, starting from 0.
+   */
+  fromLineAndColumn(line: number, column: number): number
+
   /**
    * Converts source offset to line and column.
    *
